@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Voltix Remote Studio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-brand="lg" class="not-connected">
+  <div class="aurora" aria-hidden="true"></div>
+  <nav class="topbar" aria-label="Voltix application menu">
+    <div class="brandIdentity" aria-label="Voltix Remote Studio">
+      <div class="voltixLogo"><span>V</span><i></i></div>
+      <div><strong>Voltix</strong><small>Powered Remote Control Studio</small></div>
+    </div>
+    <div class="navPills" role="menubar">
+      <button class="navPill active" data-menu-action="search">▣ Remote</button>
+      <button class="navPill" data-menu-action="connectLast">▱ Device</button>
+      <button class="navPill" data-menu-action="refreshMedia">↻ Media</button>
+      <button class="navPill" data-menu-action="about">? Help</button>
+    </div>
+    <div class="brandTabs" role="group" aria-label="Remote brand visual selector">
+      <button class="brandTab active" data-brand-tab="lg">LG</button>
+      <button class="brandTab" data-brand-tab="samsung">Samsung</button>
+      <button class="brandTab" data-brand-tab="roku">Roku</button>
+      <button class="brandTab" data-brand-tab="apple">Apple TV</button>
+      <button class="brandTab" data-brand-tab="sony">Sony</button>
+    </div>
+  </nav>
+
+  <main class="studioShell">
+    <aside class="panel neon-card finderPanel">
+      <div class="panelTitle"><span class="panelIcon">⌕</span><h2>TV Finder</h2></div>
+      <div class="finderGrid" role="radiogroup" aria-label="TV brand filter">
+        <label class="filterPill"><input type="radio" name="brand" value="all" checked><span>All Brands</span></label>
+        <label class="filterPill"><input type="radio" name="brand" value="lg"><span>LG</span></label>
+        <label class="filterPill"><input type="radio" name="brand" value="samsung"><span>Samsung</span></label>
+        <label class="filterPill"><input type="radio" name="brand" value="roku"><span>Roku</span></label>
+      </div>
+      <label class="fieldLabel" for="manualHost">Manual Host (IP Address)</label>
+      <div class="manualRow">
+        <input id="manualHost" placeholder="192.168.1.100" autocomplete="off" />
+        <button id="addHostBtn" class="glassButton">Save</button>
+      </div>
+      <button id="searchBtn" class="primaryAction signalButton">⌁ Auto Search Network</button>
+      <button id="connectLastBtn" class="secondaryAction">↻ Connect Last TV</button>
+      <div id="deviceList" class="deviceList" aria-live="polite"></div>
+      <div class="networkBadge"><span class="liveDot"></span><div><strong>Network Status</strong><small id="interfaceText">network ready</small></div></div>
+    </aside>
+
+    <section class="remoteStage neon-card" aria-label="Voltix remote control">
+      <div class="stageHeader">
+        <div>
+          <h2 id="remoteTitle">No TV Connected</h2>
+          <p id="remoteSub">Search, select, pair, then control.</p>
+        </div>
+        <button id="voiceToggle" class="voiceToggle" type="button" aria-pressed="false">Voice Off</button>
+      </div>
+
+      <div class="remoteEmitter" id="remoteEmitter" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+
+      <div class="remoteShell" id="remoteShell">
+        <div class="connectedLed" id="connectedLed"><span></span><strong id="connectedText">Disconnected</strong></div>
+        <div class="remoteName" id="remoteName">LG Magic Remote</div>
+        <div class="remoteTopKeys">
+          <button class="roundKey powerKey" data-cmd="powerOff" aria-label="Power">⏻</button>
+          <button class="roundKey" data-cmd="input">INPUT</button>
+          <button class="roundKey micKey" data-cmd="voice">◉</button>
+        </div>
+
+        <div class="numberPad">
+          <button data-cmd="digit1">1</button><button data-cmd="digit2">2</button><button data-cmd="digit3">3</button>
+          <button data-cmd="digit4">4</button><button data-cmd="digit5">5</button><button data-cmd="digit6">6</button>
+          <button data-cmd="digit7">7</button><button data-cmd="digit8">8</button><button data-cmd="digit9">9</button>
+          <button data-cmd="list">LIST</button><button data-cmd="digit0">0</button><button data-cmd="more">•••</button>
+        </div>
+
+        <div class="remoteSlabs">
+          <button data-cmd="volumeUp">VOL +</button><button data-cmd="mute">MUTE</button><button data-cmd="channelUp">CH +</button>
+          <button data-cmd="volumeDown">VOL −</button><button data-cmd="info">GUIDE</button><button data-cmd="channelDown">CH −</button>
+          <button data-cmd="home">HOME</button><button data-cmd="settings">SETTINGS</button>
+        </div>
+
+        <div class="dpad" aria-label="Directional pad">
+          <button class="d up" data-cmd="up">▲</button>
+          <button class="d left" data-cmd="left">◀</button>
+          <button class="d ok" data-cmd="ok">OK</button>
+          <button class="d right" data-cmd="right">▶</button>
+          <button class="d down" data-cmd="down">▼</button>
+        </div>
+
+        <div class="bottomKeys">
+          <button data-cmd="back">BACK</button><button data-cmd="info">INFO</button>
+        </div>
+        <div class="appKeys">
+          <button data-app="netflix">NETFLIX</button>
+          <button data-cmd="play">PLAY</button>
+          <button data-app="amazon">PRIME</button>
+        </div>
+        <div class="colorKeys" aria-label="Color keys">
+          <button data-cmd="red"></button><button data-cmd="green"></button><button data-cmd="yellow"></button><button data-cmd="blue"></button>
+        </div>
+      </div>
+
+      <div class="textDock">
+        <span>▣ Send text to TV</span>
+        <input id="textInput" placeholder="Type here..." autocomplete="off" />
+        <button id="sendTextBtn">Send</button>
+        <button data-cmd="enterText">Enter</button>
+      </div>
+    </section>
+
+    <aside class="panel neon-card sidePanel">
+      <section class="nowPlaying">
+        <div class="panelTitle"><span class="panelIcon">▣</span><h2>Now Playing</h2><button id="refreshMedia" class="refreshBtn">↻</button></div>
+        <div class="artBox">
+          <div class="screenGlow"></div>
+          <img id="thumb" alt="Current media artwork" />
+          <div id="thumbFallback">No artwork loaded</div>
+        </div>
+        <h3 id="mediaTitle">Nothing loaded</h3>
+        <p id="mediaSub">Connect a TV and refresh media.</p>
+      </section>
+
+      <section class="aboutStrip">
+        <strong>Voltix Remote Studio</strong>
+        <span>Created 2026 · © 2026 Christopher Ryan</span>
+        <span>christopher.ryan@live.com</span>
+      </section>
+
+      <section class="statusPanel">
+        <div class="panelTitle"><span class="panelIcon pulseIcon">⌁</span><h2>Tooling / Status</h2><label class="debugSwitch"><input id="debugToggle" type="checkbox"> Debug</label></div>
+        <pre id="statusLog"></pre>
+        <div class="telemetryRow">
+          <div><strong id="connectionValue">Offline</strong><small>Connection</small></div>
+          <div><strong id="latencyValue">—</strong><small>Last command</small></div>
+          <div><strong id="lastCommandValue">None</strong><small>Command</small></div>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <dialog id="aboutDialog" class="aboutDialog">
+    <form method="dialog" class="aboutCard neon-card">
+      <button class="aboutClose" aria-label="Close">×</button>
+      <div class="aboutLogo"><div class="voltixLogo large"><span>V</span><i></i></div></div>
+      <h2>Voltix Remote Studio</h2>
+      <p class="aboutTagline">Powered Remote Control Studio</p>
+      <p>Professional LAN remote control software for supported smart televisions.</p>
+      <dl>
+        <div><dt>Created</dt><dd>2026</dd></div>
+        <div><dt>Current build</dt><dd>May 2026</dd></div>
+        <div><dt>Developer</dt><dd>Christopher Ryan</dd></div>
+        <div><dt>Contact</dt><dd>christopher.ryan@live.com</dd></div>
+        <div><dt>Copyright</dt><dd>© 2026 Christopher Ryan. All rights reserved.</dd></div>
+      </dl>
+      <p class="aboutFoot">For questions, comments, licensing, or feature-access requests, contact the developer.</p>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="renderer.js"></script>
+</body>
+</html>
