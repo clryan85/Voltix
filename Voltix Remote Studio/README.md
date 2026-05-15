@@ -1,3 +1,11 @@
+<p align="center">
+  <img src="assets/voltix-logo.png" alt="Voltix Remote Studio" width="760">
+</p>
+
+<p align="center">
+  <strong>Powered Remote Control Studio</strong>
+</p>
+
 # Voltix Remote Studio
 
 Voltix Remote Studio is a local desktop control surface for supported smart TVs on the same network.
