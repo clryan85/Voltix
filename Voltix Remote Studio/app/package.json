@@ -1,0 +1,15 @@
+{
+  "name": "voltix-remote-studio",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Voltix Remote Studio LAN smart TV remote control application.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "syntax": "node scripts/syntax_check.js",
+    "mock-smoke": "node scripts/mock_smoke.js"
+  },
+  "dependencies": {
+    "ws": "file:node_modules/ws"
+  }
+}
